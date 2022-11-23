@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS CLOCK</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .clock {
+            width: 100%;
+            height: calc(100vh - 50px);
+            background: repeating-radial-gradient(ellipse at 50% 50%, #000 0%, #000066 100%);
+
+            display: flex;
+            gap: 3rem;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .clock h1 {
+            color: rgb(0, 253, 241);
+            text-transform: uppercase;
+            text-shadow: 0 0 10px rgba(0, 253, 241, 0.932);
+        }
+
+        .clock__face {
+            width: 200px;
+            height: 200px;
+            background-color: #000;
+            border-radius: 50%;
+            border: 3px solid rgb(0, 253, 241);
+            box-shadow: 0 0 30px rgba(0, 253, 241, 0.932);
+            position: relative;
+        }
+
+        .hand {
+            width: 95%;
+            height: 5px;
+            background-image: linear-gradient(to left, transparent 50%, rgb(0, 253, 241) 50%);
+
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            transform: rotate(90deg);
+            transition: all 0.05s;
+            transition-timing-function: cubic-bezier(0,2.2,.37,.86);
+        }
+
+        .clock__hour {
+            width: 70%;
+        }
+        
+        .clock__minute {
+            width: 85%;
+        }
+
+        .middle__circle {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: rgb(0, 253, 241);
+            box-shadow: 0 0 10px rgba(61, 77, 75, 0.932);
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+
+        }
+
+        .copyright {
+            width: 100%;
+            height: 50px;
+            background-color: #000;
+            color: #fff;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="clock">
+        <h1>analog clock</h1>
+        <div class="clock__face">
+            <div class="hand clock__hour"></div>
+            <div class="hand clock__minute"></div>
+            <div class="hand clock__second"></div>
+            <div class="middle__circle"></div>
+        </div>
+    </div>
+    <div class="copyright">
+        by: JOHN ARBIE DE LEON
+    </div>
+</body>
+<script>
+    const secHand = document.querySelector('.clock__second')
+    const minsHand = document.querySelector('.clock__minute')
+    const hourHand = document.querySelector('.clock__hour')
+
+    function setDate() {
+        const date = new Date()
+
+        const secforDegrees = ((date.getSeconds() / 60) * 360) + 90
+        secHand.style.transform = `rotate(${secforDegrees}deg)`
+
+        const minforDegrees = ((date.getMinutes() / 60) * 360) + 90
+        minsHand.style.transform = `rotate(${minforDegrees}deg)`
+
+        const hourforDegrees = ((date.getHours() / 12) * 360) + 90
+        hourHand.style.transform = `rotate(${hourforDegrees}deg)`
+        
+    }
+
+    setInterval(setDate, 1000)
+</script>
+</html>
